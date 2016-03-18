@@ -65,9 +65,8 @@ $(function(){ // обработчик кликов мыши
 });
 
 $(function(){ // обработчик клавиатуры
-	var button = $('#mybutton');
-	button.focus();
-	button.keydown(function(e){
+	var body = $('body');
+	body.keydown(function(e){
 		switch (e.which) {
 			case 37 : eventKey(1,0);break; // хотим сместить костяшку с правой позиции (+1) горизонтали и на 0 по вертикали
 			case 39 : eventKey(-1,0);break; // хотим сместить костяшку с левой позиции (-1) по горизонтали
@@ -80,10 +79,6 @@ $(function(){ // обработчик клавиатуры
 
 
 }
-
-
-
-
 function game15(){
 	var cellView = null;
 	var numView = null;
