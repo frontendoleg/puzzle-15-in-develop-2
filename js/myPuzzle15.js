@@ -1,3 +1,14 @@
+var arr = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]];
+function getNull(){	//функция возвращает координату пустой клетки
+				for (var yi = 0;  yi < 4; yi++) {
+					for (var xj = 0; xj < 4; xj++) {
+						if (arr[yi][xj] === 0) {
+							return{"x":xj,"y":yi};
+						}
+					}
+				}
+			}
+
 function init() {
 	console.time("draw");
 	var browserWidth = window.innerWidth; // ширина окна
@@ -17,9 +28,15 @@ var field = new game15(); 	// создаем объект пятнашек
 field.draw(boneSize);
 console.timeEnd("draw"); // рисуем наши пятнашки
 
-function event(x,y){
+function event(x,y){ // функция действия при кликах мыши
 	field.move(x,y);
 	field.draw(boneSize);
+}
+
+function eventKey(x,y){ // функция действия при нажатии клавиш
+	// нужно переместить подходящую костяшку, если это возможно
+	//var xNull = getNull();
+	//console.log ('xNull = ',xNull);
 }
 
 $(function(){ // обработчик кликов мыши
@@ -40,10 +57,10 @@ $(function(){ // обработчик клавиатуры
 	button.focus();
 	button.keydown(function(e){
 		switch (e.which) {
-			case 37 : console.log('left');break;
-			case 39 : console.log('right');break;
-			case 38 : console.log('up');break;
-			case 40 : console.log('down');
+			case 37 : eventKey(-1,0);console.log ('1');break; // хотим сместить костяшку на -1 по горизонтали и на 0 по вертикали
+			case 39 : eventKey(1,0);break; // хотим сместить костяшку на +1 по горизонтали
+			case 38 : eventKey(0,-1);break; // хотим сместит вверх по вертикали
+			case 40 : eventKey(0,1); // хотим сместить вниз по вертикали
 		}
 	});
 
@@ -53,20 +70,14 @@ $(function(){ // обработчик клавиатуры
 }
 
 
+
+
 function game15(){
 	var cellView = null;
 	var numView = null;
-	var arr = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]];
+
 	var cliks = 0;
-			function getNull(){	//функция возвращает координату пустой клетки
-				for (var yi = 0;  yi < 4; yi++) {
-					for (var xj = 0; xj < 4; xj++) {
-						if (arr[yi][xj] === 0) {
-							return{"x":xj,"y":yi};
-						}
-					}
-				}
-			}
+
 	// метод, рисующий наши пятнашки на экране
 	this.draw = function(boneSize) {
 		console.log('arr',arr);
