@@ -35,8 +35,20 @@ function event(x,y){ // функция действия при кликах мы
 
 function eventKey(x,y){ // функция действия при нажатии клавиш
 	// нужно переместить подходящую костяшку, если это возможно
-	//var xNull = getNull();
-	//console.log ('xNull = ',xNull);
+	var xNull = getNull().x;
+	console.log ('xNull = ',xNull);
+	var yNull = getNull().y;
+	console.log ('yNull = ',yNull);
+	var xBone = x+xNull, yBone = y+yNull; // координаты клетки кандидата
+	console.log('xBone = ', xBone);
+	console.log('yBone = ', yBone);
+	if((xBone >= 0 && xBone < 4) && (yBone >= 0 && yBone < 4)){
+		// костяшку сдвинуть можно
+		//alert('xBone = '+xBone + ' yBone = '+yBone);
+		field.move(xBone,yBone);
+	field.draw(boneSize);
+
+	}
 }
 
 $(function(){ // обработчик кликов мыши
@@ -57,10 +69,10 @@ $(function(){ // обработчик клавиатуры
 	button.focus();
 	button.keydown(function(e){
 		switch (e.which) {
-			case 37 : eventKey(-1,0);console.log ('1');break; // хотим сместить костяшку на -1 по горизонтали и на 0 по вертикали
-			case 39 : eventKey(1,0);break; // хотим сместить костяшку на +1 по горизонтали
-			case 38 : eventKey(0,-1);break; // хотим сместит вверх по вертикали
-			case 40 : eventKey(0,1); // хотим сместить вниз по вертикали
+			case 37 : eventKey(1,0);break; // хотим сместить костяшку с правой позиции (+1) горизонтали и на 0 по вертикали
+			case 39 : eventKey(-1,0);break; // хотим сместить костяшку с левой позиции (-1) по горизонтали
+			case 38 : eventKey(0,1);break; // хотим сместит сверху по вертикали
+			case 40 : eventKey(0,-1); // хотим сместить снизу по вертикали
 		}
 	});
 
